@@ -26,7 +26,7 @@ func RandomMatrix(w, h, max int) ([][]int, error) {
 	if err != nil {
 		return nil, err
 	}
-	arr := [][]int{}
+	var arr [][]int
 	for i := 0; i < w; i++ {
 		arr = append(arr, []int{})
 		for j := 0; j < h; j++ {
@@ -49,7 +49,7 @@ func UniqNumber(w, h, max int) ([]int, error) {
 			un[num] = nil
 		}
 	}
-	arr := []int{}
+	var arr []int
 	for i, _ := range un {
 		if len(arr) >= (w * h) {
 			break
