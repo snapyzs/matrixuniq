@@ -40,8 +40,9 @@ func RandomMatrix(w, h, max int) ([][]int, error) {
 func UniqNumber(w, h, max int) []int {
 	rand.Seed(time.Now().UnixNano())
 	un := map[int]interface{}{}
-	for len(un) < (w * h) {
-		for i := 0; i < ((w * h) - len(un)); i++ {
+	wh := w * h
+	for len(un) < wh {
+		for i := 0; i < (wh - len(un)); i++ {
 			num := rand.Intn(max)
 			un[num] = nil
 		}
