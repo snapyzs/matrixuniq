@@ -8,27 +8,24 @@ import (
 	"time"
 )
 
-func Correct(w, h, max int) error {
+func isCorrect(w, h, max int) error {
 	if w <= 0 {
-		return errors.New("Width need more 0 and no minus")
+		return errors.New("Width needs to be more than 0")
 	}
 	if h <= 0 {
-		return errors.New("Height need more 0 and no minus")
+		return errors.New("Height needs to be more than 0")
 	}
 	if max < (w * h) {
-		return errors.New("Max need more w*h for uniq numbers")
+		return errors.New("Max needs more w*h for uniq numbers")
 	}
 	return nil
 }
 
 func RandomMatrix(w, h, max int) ([][]int, error) {
-	if err := Correct(w, h, max); err != nil {
+	if err := isCorrect(w, h, max); err != nil {
 		return nil, err
 	}
-	nums, err := UniqNumber(w, h, max)
-	if err != nil {
-		return nil, err
-	}
+	nums := UniqNumber(w, h, max)
 	var arr [][]int
 	for i := 0; i < w; i++ {
 		arr = append(arr, []int{})
@@ -40,10 +37,7 @@ func RandomMatrix(w, h, max int) ([][]int, error) {
 	return arr, nil
 }
 
-func UniqNumber(w, h, max int) ([]int, error) {
-	if err := Correct(w, h, max); err != nil {
-		return nil, err
-	}
+func UniqNumber(w, h, max int) []int {
 	rand.Seed(time.Now().UnixNano())
 	un := map[int]interface{}{}
 	for len(un) < (w * h) {
@@ -56,7 +50,7 @@ func UniqNumber(w, h, max int) ([]int, error) {
 	for i, _ := range un {
 		arr = append(arr, i)
 	}
-	return arr, nil
+	return arr
 }
 
 var w, h, max int

@@ -55,11 +55,7 @@ func TestUniqNumber(t *testing.T) {
 	for _, test := range tests {
 		name := fmt.Sprintf("Case(%d,%d,%d)", test.w, test.h, test.maxNumber)
 		t.Run(name, func(t *testing.T) {
-			got, err := UniqNumber(test.w, test.h, test.maxNumber)
-			if err != nil {
-				t.Errorf("%v", err)
-			}
-
+			got := UniqNumber(test.w, test.h, test.maxNumber)
 			if test.maxNumber < (test.w * test.h) {
 				t.Errorf("got:%d; want:%d", test.maxNumber, test.w*test.h)
 			}
