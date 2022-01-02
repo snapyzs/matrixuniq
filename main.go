@@ -52,11 +52,8 @@ func UniqNumber(w, h, max int) ([]int, error) {
 			un[num] = nil
 		}
 	}
-	var arr []int
+	arr := make([]int, 0, len(un))
 	for i, _ := range un {
-		if len(arr) >= (w * h) {
-			break
-		}
 		arr = append(arr, i)
 	}
 	return arr, nil
