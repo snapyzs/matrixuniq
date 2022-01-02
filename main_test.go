@@ -7,24 +7,25 @@ import (
 
 func TestRandomMatrix(t *testing.T) {
 	tests := []struct {
-		h, w, muxNumber, equalRangeMatrix int
+		h, w, maxNumber, equalRangeMatrix int
 	}{
 		{2, 2, 100, 4},
 		{4, 4, 150, 16},
 		{10, 5, 65, 50},
+		{50, 50, 2500, 1600},
 	}
 	for _, test := range tests {
-		name := fmt.Sprintf("Case(%d,%d,%d)", test.w, test.h, test.muxNumber)
+		name := fmt.Sprintf("Case(%d,%d,%d)", test.w, test.h, test.maxNumber)
 		t.Run(name, func(t *testing.T) {
-			got, err := RandomMatrix(test.w, test.h, test.muxNumber)
+			got, err := RandomMatrix(test.w, test.h, test.maxNumber)
 			if err != nil {
 				t.Errorf("%v", err)
 			}
 
 			for _, k := range got {
 				for _, j := range k {
-					if j > test.muxNumber {
-						t.Errorf("got:%d; want:%d", j, test.muxNumber)
+					if j > test.maxNumber {
+						t.Errorf("got:%d; want:%d", j, test.maxNumber)
 					}
 				}
 			}
@@ -47,6 +48,8 @@ func TestUniqNumber(t *testing.T) {
 		{2, 2, 100, 1},
 		{4, 4, 150, 1},
 		{10, 5, 65, 1},
+		{30, 30, 1000, 1},
+		{50, 50, 2500, 1},
 	}
 
 	for _, test := range tests {
@@ -56,6 +59,11 @@ func TestUniqNumber(t *testing.T) {
 			if err != nil {
 				t.Errorf("%v", err)
 			}
+
+			if test.maxNumber < (test.w * test.h) {
+				t.Errorf("got:%d; want:%d", test.maxNumber, test.w*test.h)
+			}
+
 			if len(got) > (test.w * test.h) {
 				t.Errorf("got %d; want %d", len(got), test.w*test.h)
 			}

@@ -8,18 +8,21 @@ import (
 	"time"
 )
 
-func Correct(w, h int) error {
+func Correct(w, h, max int) error {
 	if w <= 0 {
 		return errors.New("Width need more 0 and no minus")
 	}
 	if h <= 0 {
 		return errors.New("Height need more 0 and no minus")
 	}
+	if max < (w * h) {
+		return errors.New("Max need more w*h for uniq numbers")
+	}
 	return nil
 }
 
 func RandomMatrix(w, h, max int) ([][]int, error) {
-	if err := Correct(w, h); err != nil {
+	if err := Correct(w, h, max); err != nil {
 		return nil, err
 	}
 	nums, err := UniqNumber(w, h, max)
@@ -38,13 +41,13 @@ func RandomMatrix(w, h, max int) ([][]int, error) {
 }
 
 func UniqNumber(w, h, max int) ([]int, error) {
-	if err := Correct(w, h); err != nil {
+	if err := Correct(w, h, max); err != nil {
 		return nil, err
 	}
 	rand.Seed(time.Now().UnixNano())
 	un := map[int]interface{}{}
 	for len(un) < (w * h) {
-		for i := 0; i < (w * h); i++ {
+		for i := 0; i < ((w * h) - len(un)); i++ {
 			num := rand.Intn(max)
 			un[num] = nil
 		}
