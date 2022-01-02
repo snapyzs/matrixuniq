@@ -42,10 +42,8 @@ func UniqNumber(w, h, max int) []int {
 	un := map[int]interface{}{}
 	wh := w * h
 	for len(un) < wh {
-		for i := 0; i < (wh - len(un)); i++ {
-			num := rand.Intn(max)
-			un[num] = nil
-		}
+		num := rand.Intn(max)
+		un[num] = nil
 	}
 	arr := make([]int, 0, len(un))
 	for i, _ := range un {
