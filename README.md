@@ -1,4 +1,4 @@
-## Uniq Randmon Matrix
+## Uniq Randmon Matrix 
 ### Заполняет матрицу рандомными уникальными числами в указанном диапазоне
 ```
 $ go run main.go -w 10 -h 10 -max 100
